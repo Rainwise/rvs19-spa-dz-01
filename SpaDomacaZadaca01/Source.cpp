@@ -1,11 +1,16 @@
 #include <SFML/Graphics.hpp>
+#include "Cvijet.h"
+#include "Wolf3D.h"
+#include "Bird.h"
+
+sf::Clock clk;
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Hello, SFML world!");
 	window.setFramerateLimit(60);
-	//Cvijet cvijet(&window);
-
+	// Cvijet cvijet(&window);
+	Wolf3D wolf(&window);
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -15,8 +20,12 @@ int main()
 				window.close();
 		}
 
+		float deltaTime = clk.restart().asSeconds();
+		wolf.update(deltaTime);
+
 		window.clear();
-		//cvijet.draw();
+		// cvijet.draw();
+		wolf.draw();
 		window.display();
 	}
 
